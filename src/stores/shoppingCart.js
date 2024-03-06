@@ -37,11 +37,11 @@ export const useShoppingCart = defineStore('shopping-cart', {
       return this.cartData.find((item) => item.id === product.id);
     },
     addCheckedData(product) {
+      let getId = this.checkData.findIndex((item) => item.id === product.id);
       if (product.checked) {
         this.checkData.push(product);
-        console.log(this.checkData);
       } else {
-        this.checkData = this.cartData.filter((item) => item.id === product.id);
+        this.checkData.splice(getId, 1);
       }
     },
     countTotal() {
@@ -49,7 +49,7 @@ export const useShoppingCart = defineStore('shopping-cart', {
       let price = 0;
       this.checkData.forEach((item) => {
         count += item.quantity;
-        price += (item.quantity * item.price);
+        price += item.quantity * item.price;
       });
 
       return { count: count, price: price };

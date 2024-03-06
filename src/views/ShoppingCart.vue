@@ -29,11 +29,11 @@ export default {
       product.checked = !product.checked
       this.addCheckedData(product)
       
-    }
+    },
 
   },
   computed: {
-    ...mapState(useShoppingCart, ['cartData']),
+    ...mapState(useShoppingCart, ['cartData','checkData']),
 
     newCartData() {
       const arr = this.cartData.map(item => {
@@ -53,6 +53,7 @@ export default {
   <div class="w-full px-5">
     <h1 class="mb-3 text-3xl font-bold">購物車確認</h1>
 
+    {{ checkData }}
     <section class="mb-6 px-5">
       <div class="grid grid-cols-6 border-y font-bold py-1 gap-x-3">
         <div></div>

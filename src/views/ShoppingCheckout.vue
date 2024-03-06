@@ -112,8 +112,8 @@ export default {
       </div>
 
       <div class="flex justify-end flex-wrap mb-5">
-        <p class="text-2xl font-bold w-full text-end">商品數量: 0</p>
-        <p class="text-2xl font-bold w-full text-end">商品金額: $ 0</p>
+        <p class="text-2xl font-bold w-full text-end">商品數量: {{ countTotal().count }}</p>
+        <p class="text-2xl font-bold w-full text-end">商品金額: $ {{ countTotal().price }}</p>
       </div>
 
       <div class="w-full flex justify-between text-white text-2xl font-bold">

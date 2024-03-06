@@ -1,11 +1,25 @@
 <!-- 購物車個人資訊及送出頁 -->
 
 <script>
+import { useShoppingCart } from '@/stores/shoppingCart';
+import { mapState, mapActions } from 'pinia';
+
 export default {
-  
+  computed: {
+    ...mapState(useShoppingCart, ['checkData', 'buyerData']),
+  },
+  methods: {
+    ...mapActions(useShoppingCart, ['countTotal', 'resetCartData']),
+
+    submitCart() {
+      this.resetCartData();
+      this.$router.push('/buysuccess');
+    },
+
+  },
   data() {
     return {
-   
+
     };
   },
   methods: {
@@ -26,13 +40,13 @@ export default {
         <div class="text-center">數量</div>
       </div>
 
-      <div class="grid grid-cols-4 py-1 border-b min-h-[80px] gap-x-3 md:gap-x-1 lg:first:border-t lg:!py-3">
+      <div v-for="item in checkData" :key="item.id" class="grid grid-cols-4 py-1 border-b min-h-[80px] gap-x-3 md:gap-x-1 lg:first:border-t lg:!py-3">
         <div class="flex justify-center">
-          <img src="" alt="商品圖示" class="w-[100px] h-full object-cover" />
+          <img :src= item.pic alt="商品圖示" class="w-[100px] h-full object-cover" />
         </div>
-        <p class="flex items-center">Bytecard</p>
-        <p class="flex justify-center items-center">$ 954</p>
-        <p class="flex justify-center items-center">1</p>
+        <p class="flex items-center"> {{ item.name }}</p>
+        <p class="flex justify-center items-center">$ {{ item.price }}</p>
+        <p class="flex justify-center items-center"> {{ item.quantity }} </p>
       </div>
     </section>
 
@@ -49,12 +63,12 @@ export default {
 
       <div>
         <div class="grid grid-cols-6 py-1 border-b border-main-deep min-h-[80px] gap-x-3 md:gap-x-1 lg:first:border-t">
-          <p class="flex items-center">Mark</p>
-          <p class="flex items-center">0912345678</p>
-          <p class="flex items-center">台中市南區興大路145號</p>
-          <p class="flex items-center">貨到付款</p>
-          <p class="flex items-center">mark@gmail.com</p>
-          <p class="flex items-center">超商取貨</p>
+          <p class="flex items-center">{{buyerData.name }}</p>
+          <p class="flex items-center">{{buyerData.phone }}</p>
+          <p class="flex items-center">{{buyerData.address }}</p>
+          <p class="flex items-center">{{buyerData.paymentMethod }}</p>
+          <p class="flex items-center">{{buyerData.email }}</p>
+          <p class="flex items-center">{{buyerData.deliver }}</p>
         </div>
       </div>
     </section>
