@@ -42,9 +42,6 @@ export default {
       });
       return arr
     },
-
-
-
   }
 };
 </script>
